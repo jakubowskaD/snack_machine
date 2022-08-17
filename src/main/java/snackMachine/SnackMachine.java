@@ -23,8 +23,6 @@ public class SnackMachine {
         positionList = new RandomGenerator().positionGenerator(numberOfPositions, maxPrice);
         text.hello();
         printMenu();
-//            printSnacks();
-//            getSnack(myObj.nextLine());
     }
 
     private void printMenu(){
@@ -32,6 +30,7 @@ public class SnackMachine {
         String number = myObj.nextLine();
         if(number.equals("1")){
             printSnacks();
+            getSnack();
         }else if(number.equals("2")){
 
         }else if(number.equals("3")){
@@ -49,17 +48,22 @@ public class SnackMachine {
             }
         }
     }
-    private void getSnack(String choseNumber){
+    private void getSnack(){
+        String choseNumber = myObj.nextLine();
         if (Integer.parseInt(choseNumber)<= positionList.size()){
             for(Position position : positionList){
                 if (position.getNumber() == Integer.parseInt(choseNumber)){
-                    position.setOccupied(false);
-                    text.mniam();
-                    break;
+                    if (position.isOccupied()){
+                        position.setOccupied(false);
+                        text.mniam();
+                    } else {
+                        text.wrong();
+                    }
+                    printMenu();
             }}
         }else{
             text.wrong();
-            printSnacks();
+            getSnack();
         }
     }
     private boolean isStealHungry(String choseNumber){
