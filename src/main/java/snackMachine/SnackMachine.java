@@ -4,6 +4,7 @@ import snackMachine.position.Position;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
 
 public class SnackMachine {
@@ -12,6 +13,7 @@ public class SnackMachine {
     private final int numberOfPositions;
     private final int maxPrice;
     List<Position> positionList = new ArrayList<>();
+    List<Position> emptyPositionList = new ArrayList<>();
     Scanner myObj = new Scanner(System.in);
 
     public SnackMachine(int numberOfPositions, int maxPrice) {
@@ -32,7 +34,7 @@ public class SnackMachine {
             printSnacks();
             getSnack();
         }else if(number.equals("2")){
-
+            addRandomSnack();
         }else if(number.equals("3")){
             System.exit(0);
         }else{
@@ -66,7 +68,24 @@ public class SnackMachine {
             getSnack();
         }
     }
-    private boolean isStealHungry(String choseNumber){
-        return choseNumber.equals("q");
+    private void printAddSnack(){
+        for(Position position : positionList){
+            if(!position.isOccupied()){
+                System.out.println(position.getNumber());
+                emptyPositionList.add(position);
+            }
+        }
     }
+    private void addRandomSnack(){
+        printAddSnack();
+        String choseNumber = myObj.nextLine();
+        for(Position position : emptyPositionList){
+            if (position.getNumber() == Integer.parseInt(choseNumber)){
+                position.setOccupied(true);
+                position.setSnack(Optional.ofNullable(new RandomGenerator().snackGenerator(maxPrice)));
+                emptyPositionList.remove(position);
+            }
+        }printMenu();
+    }
+
 }

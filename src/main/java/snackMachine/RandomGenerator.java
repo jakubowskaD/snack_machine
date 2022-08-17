@@ -20,7 +20,7 @@ public class RandomGenerator {
         }
         return positionList;
     }
-    private Snack snackGenerator(int maxPrice){
+    Snack snackGenerator(int maxPrice){
         return new Snack(randomSnackType(), randomPrice(maxPrice));
     }
     private SnackType randomSnackType(){
