@@ -85,7 +85,8 @@ public class SnackMachine {
                 position.setSnack(Optional.ofNullable(new RandomGenerator().snackGenerator(maxPrice)));
                 emptyPositionList.remove(position);
             }
-        }printMenu();
+        }
+        printMenu();
     }
 
 }

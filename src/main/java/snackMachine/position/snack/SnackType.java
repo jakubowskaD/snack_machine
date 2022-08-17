@@ -6,5 +6,4 @@ public enum SnackType {
     WATER,
     APPLE,
     BREADSTICKS;
-
 }
